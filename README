@@ -1,9 +1,3 @@
-Tema 3 SD - Frant Madalina 315CB
-
-In cadrul arhivei exista 3 fisiere sursa (carte.c, trie.c, main.c) si
-2 fisiere header (carte.h, trie.h).
-
-
 In fisierul carte.c sunt implementate functii asupra structurii de tip Carte:
 
 Functia InitCarte initializeaza si returneaza o structura de tip Carte.
@@ -121,8 +115,3 @@ delete_authorT2).
 
 In main se citeste din fisier linie cu linie si in functie de primul cuvant
 de pe linie se realizeaza operatia corespunzatoare.
-
-
-Punctaj obtinut la rularea pe calculatorul propriu:
-    Total: [135/135]
-    Bonus: [20/20]
