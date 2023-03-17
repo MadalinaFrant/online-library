@@ -1,0 +1,128 @@
+Tema 3 SD - Frant Madalina 315CB
+
+In cadrul arhivei exista 3 fisiere sursa (carte.c, trie.c, main.c) si
+2 fisiere header (carte.h, trie.h).
+
+
+In fisierul carte.c sunt implementate functii asupra structurii de tip Carte:
+
+Functia InitCarte initializeaza si returneaza o structura de tip Carte.
+
+Functia AfiCarte afiseaza campurile structurii de tip Carte.
+
+Functia ElibCarte elibereaza spatiul alocat pentru o structura de tip Carte.
+
+Functia copieCarte creeaza si returneaza o copie a cartii primite ca
+parametru.
+
+
+In fisierul trie.c sunt implementate functii asupra arborilor de prefixe 
+(trie):
+
+Functia InitT1 initializeaza si returneaza o structura de tip Trie1 (cheia 
+este titlul cartii, informatia retinuta la finalul caii este un pointer catre
+o structura de tip Carte).
+
+Functia InitT2 initializeaza si returneaza o structura de tip Trie2 (cheia 
+este numele unui autor, informatia retinuta la finalul caii este un pointer 
+catre o structura de tip Trie1).
+
+Functia DistrT1 distruge un arbore de tip Trie1, eliberand toata memoria 
+alocata.
+
+Functia DistrT2 distruge un arbore de tip Trie2, eliberand toata memoria 
+alocata.
+
+Functia CharToIndex primeste un caracter si il converteste in indexul 
+corespunzator pozitiei lui din sirul 
+"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-'?! " .
+
+Functia IndexToChar primeste un index si il converste in caracterul
+corespunzator.
+
+Functia add_bookT1 adauga cartea c in arborele de tip Trie1 (parcurge
+arborele adaugand fiecare litera a titlului si adauga la finalul caii
+cartea c).
+
+Functia add_bookT2 adauga cartea c in arborele de tip Trie2 (parcurge
+arborele adaugand fiecare litera a numelui autorului si apeleaza add_bookT1
+pentru a adauga cartea in arborele corespunzator autorului).
+
+Functia add_book initializeaza cartea ce trebuie introdusa in arbori, apoi 
+o adauga in arborii T1 si T2, apeland functiile add_bookT1 si add_bookT2.
+
+Functia find_book cauta o carte in arborele de tip Trie1 si in caz ca 
+aceasta exista intoarce pointerul la structura de tip Carte gasita, altfel
+intoarce NULL.
+
+Functia find_author cauta un autor in arborele de tip Trie2 si in caz ca 
+acesta exista intoarce pointerul la structura de tip Trie1 gasita, altfel
+intoarce NULL.
+
+Functia print_book afiseaza maxim max cuvinte ale arborelui de tip Trie1,
+in ordine lexicografica. Se poate verifica existenta unui cuvant
+prin pointerul sau la structura de tip Carte, in cazul de existenta 
+afisandu-se campul titlu al acesteia.
+
+Functia print_author afiseaza maxim max cuvinte ale arborelui de tip Trie2,
+in ordine lexicografica. Se salveaza intr-un sir numele de autori existente,
+afisandu-le (existenta unui autor se verifica prin pointerul la structura de
+tip Trie1 a cartilor scrise de acesta). 
+
+Functia autocomplete_book preia un prefix al unui titlu si afiseaza 
+primele maxim 3 titluri de carti care incep cu acest prefix (apeland
+functia print_book cu parametrul max egal cu 3).
+
+Functia autocomplete_author preia un prefix al unui autor si afiseaza 
+primii maxim 3 autori care incep cu acest prefix (apeland functia 
+print_author cu parametrul max egal cu 3 si cu parametrul str egal cu
+prefixul dat).
+
+Functia search_book verifica daca o carte exista in T1 (folosind functia
+find_book). Daca exista, afiseaza informatiile cartii (folosind functia 
+AfiCarte). Daca nu exista, afiseaza acest lucru.
+
+Functia search_by_author verifica mai intai daca un autor exista in T2
+(folosind functia find_author), in caz de neexistenta afisand acest lucru.
+In caz de existenta, daca titlul este dat ca prefix se apeleaza functia 
+autocomplete_book, altfel se apeleaza functia search_book.
+
+Functia list_author afiseaza toate cartile scrise de un autor, apeland
+functia print_book cu parametrul max egal cu numarul maxim de descendenti.
+Daca autorul nu exista, se afiseaza acest lucru.
+
+Functia AreCarti verifica daca un arbore de tip Trie1 contine pointeri 
+la structuri de tip Carte.
+
+Functia AreDescendentiT1 verifica daca un arbore de tip Trie1 are descendenti.
+
+Functia AreDescendentiT2 verifica daca un arbore de tip Trie2 are descendenti.
+
+Functia delete_bookT1 elimina o carte dintr-un arbore Trie1 astfel: se 
+verifica (recursiv) pornind de la sfarsitul cuvantului daca fiecare litera este 
+continuta intr-un alt cuvant. Daca nu, se sterge nodul din arbore corespunzator 
+literei. Se sterge pointerul la structura cartii ce trebuie eliminata.
+
+Functia delete_authorT2 elimina un autor dintr-un arbore Trie2 astfel: se 
+verifica (recursiv) pornind de la sfarsitul numelui daca fiecare litera este 
+continuta intr-un alt nume. Daca nu, se sterge nodul din arbore corespunzator 
+literei. Se sterge pointerul la structura Trie1 care contine cartile 
+scrise de autor.
+
+Functia delete_book verifica mai intai daca cartea ce trebuie eliminata exista
+in arborele T1. Daca nu, se afiseaza acest lucru si se opreste. Altfel, se 
+sterge cartea din T1 apeland functia delete_bookT1. Apoi se apeleaza functia 
+find_author pentru a gasi pointerul la Trie1 ce contine cartile scrise de 
+autorul cartii eliminate. Se apeleaza functia delete_bookT1 pentru a elimina 
+cartea si din acest arbore. Daca dupa aceasta eliminare acest arbore nu mai 
+contine nicio carte, se elimina autorul din T2 (cu ajutorul functiei 
+delete_authorT2).
+
+
+In main se citeste din fisier linie cu linie si in functie de primul cuvant
+de pe linie se realizeaza operatia corespunzatoare.
+
+
+Punctaj obtinut la rularea pe calculatorul propriu:
+    Total: [135/135]
+    Bonus: [20/20]
